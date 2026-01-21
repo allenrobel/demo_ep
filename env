@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+export PYTHONPATH="$HOME/repos/demo_ep"
+echo $PYTHONPATH
