@@ -11,7 +11,7 @@ cd demo_ep
 python -m venv .venv --prompt demo_ep
 source .venv/bin/activate
 source env
-pip install uv
+pip install uv # if not already installed
 uv sync
 pytest # run unit tests
 python demo_composite.py # run demo script
