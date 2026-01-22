@@ -20,20 +20,22 @@ handling, and HTTP verb assignment.
 """
 
 import pytest
-from endpoints import (
-    EpOneManageFabricConfigDeploy,
-    EpOneManageFabricConfigDeploySwitch,
-    EpOneManageFabricConfigPreview,
-    EpOneManageFabricConfigPreviewSwitch,
+from endpoint_query_params import (
     FabricConfigDeployQueryParams,
     FabricConfigPreviewQueryParams,
 )
 from enums import BooleanStringEnum, VerbEnum
-
+from onemanage_fabric_endpoints import (
+    EpOneManageFabricConfigDeploy,
+    EpOneManageFabricConfigDeploySwitch,
+    EpOneManageFabricConfigPreview,
+    EpOneManageFabricConfigPreviewSwitch,
+)
 
 # ============================================================================
 # FabricConfigDeployQueryParams Tests (100-199)
 # ============================================================================
+
 
 def test_fabric_config_deploy_query_params_00100():
     """
@@ -152,6 +154,7 @@ def test_fabric_config_deploy_query_params_00140():
 # FabricConfigPreviewQueryParams Tests (200-299)
 # ============================================================================
 
+
 def test_fabric_config_preview_query_params_00200():
     """
     # Summary
@@ -250,6 +253,7 @@ def test_fabric_config_preview_query_params_00230():
 # ============================================================================
 # EpOneManageFabricConfigDeploy Tests (300-399)
 # ============================================================================
+
 
 def test_ep_one_manage_fabric_config_deploy_00300():
     """
@@ -384,6 +388,7 @@ def test_ep_one_manage_fabric_config_deploy_00350():
 # ============================================================================
 # EpOneManageFabricConfigDeploySwitch Tests (400-499)
 # ============================================================================
+
 
 def test_ep_one_manage_fabric_config_deploy_switch_00400():
     """
@@ -551,6 +556,7 @@ def test_ep_one_manage_fabric_config_deploy_switch_00460():
 # EpOneManageFabricConfigPreview Tests (500-599)
 # ============================================================================
 
+
 def test_ep_one_manage_fabric_config_preview_00500():
     """
     # Summary
@@ -635,6 +641,7 @@ def test_ep_one_manage_fabric_config_preview_00530():
 # ============================================================================
 # EpOneManageFabricConfigPreviewSwitch Tests (600-699)
 # ============================================================================
+
 
 def test_ep_one_manage_fabric_config_preview_switch_00600():
     """

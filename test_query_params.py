@@ -23,10 +23,10 @@ import pytest
 from query_params import EndpointQueryParams, LuceneQueryParams, CompositeQueryParams
 from enums import BooleanStringEnum
 
-
 # ============================================================================
 # EndpointQueryParams Tests (100-299)
 # ============================================================================
+
 
 def test_endpoint_query_params_00100():
     """
@@ -65,6 +65,7 @@ def test_endpoint_query_params_00110():
     - PASS: snake_case fields are converted to camelCase
     - FAIL: Incorrect case conversion
     """
+
     # Create a simple subclass for testing
     class TestParams(EndpointQueryParams):
         test_field: str = "value"
@@ -89,6 +90,7 @@ def test_endpoint_query_params_00120():
     - PASS: None values are excluded from query string
     - FAIL: None values appear in query string
     """
+
     class TestParams(EndpointQueryParams):
         field_one: str = "present"
         field_two: str | None = None
@@ -115,6 +117,7 @@ def test_endpoint_query_params_00130():
     - PASS: is_empty() returns True when only defaults are set
     - FAIL: Returns False incorrectly
     """
+
     class TestParams(EndpointQueryParams):
         field_with_default: str = "default_value"
 
@@ -126,6 +129,7 @@ def test_endpoint_query_params_00130():
 # ============================================================================
 # LuceneQueryParams Tests (300-599)
 # ============================================================================
+
 
 def test_lucene_query_params_00300():
     """
@@ -310,12 +314,7 @@ def test_lucene_query_params_00380():
     - PASS: All parameters present, separated by &
     - FAIL: Missing parameters or incorrect separator
     """
-    params = LuceneQueryParams(
-        filter="status:active",
-        max=50,
-        offset=10,
-        sort="name:desc"
-    )
+    params = LuceneQueryParams(filter="status:active", max=50, offset=10, sort="name:desc")
     query_string = params.to_query_string(url_encode=False)
     assert "filter=status:active" in query_string
     assert "max=50" in query_string
@@ -555,6 +554,7 @@ def test_lucene_query_params_00480():
 # ============================================================================
 # CompositeQueryParams Tests (600-899)
 # ============================================================================
+
 
 def test_composite_query_params_00600():
     """

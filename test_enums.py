@@ -22,10 +22,10 @@ enum values and string inheritance behavior.
 import pytest
 from enums import BooleanStringEnum, VerbEnum
 
-
 # ============================================================================
 # BooleanStringEnum Tests (100-199)
 # ============================================================================
+
 
 def test_boolean_string_enum_00100():
     """
@@ -131,6 +131,7 @@ def test_boolean_string_enum_00140():
 # ============================================================================
 # VerbEnum Tests (200-299)
 # ============================================================================
+
 
 def test_verb_enum_00200():
     """

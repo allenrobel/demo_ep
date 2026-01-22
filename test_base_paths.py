@@ -22,10 +22,10 @@ for all NDFC API endpoints.
 import pytest
 from base_paths import BasePath
 
-
 # ============================================================================
 # Constants Tests (100-199)
 # ============================================================================
+
 
 def test_base_path_constants_00100() -> None:
     """
@@ -86,6 +86,7 @@ def test_base_path_constants_00120() -> None:
 # api() Method Tests (200-299)
 # ============================================================================
 
+
 def test_base_path_api_00200() -> None:
     """
     # Summary
@@ -145,6 +146,7 @@ def test_base_path_api_00220() -> None:
 # v1() Method Tests (300-399)
 # ============================================================================
 
+
 def test_base_path_v1_00300() -> None:
     """
     # Summary
@@ -186,6 +188,7 @@ def test_base_path_v1_00310() -> None:
 # lan_fabric() Method Tests (400-499)
 # ============================================================================
 
+
 def test_base_path_lan_fabric_00400() -> None:
     """
     # Summary
@@ -226,6 +229,7 @@ def test_base_path_lan_fabric_00410() -> None:
 # ============================================================================
 # control_fabrics() Method Tests (500-599)
 # ============================================================================
+
 
 def test_base_path_control_fabrics_00500() -> None:
     """
@@ -290,6 +294,7 @@ def test_base_path_control_fabrics_00520() -> None:
 # onemanage() Method Tests (600-699)
 # ============================================================================
 
+
 def test_base_path_onemanage_00600() -> None:
     """
     # Summary
@@ -330,6 +335,7 @@ def test_base_path_onemanage_00610() -> None:
 # ============================================================================
 # onemanage_fabrics() Method Tests (700-799)
 # ============================================================================
+
 
 def test_base_path_onemanage_fabrics_00700() -> None:
     """
@@ -394,6 +400,7 @@ def test_base_path_onemanage_fabrics_00720() -> None:
 # onemanage_links() Method Tests (800-899)
 # ============================================================================
 
+
 def test_base_path_onemanage_links_00800() -> None:
     """
     # Summary
@@ -438,6 +445,7 @@ def test_base_path_onemanage_links_00810() -> None:
 # onemanage_links_fabrics() Method Tests (900-999)
 # ============================================================================
 
+
 def test_base_path_onemanage_links_fabrics_00900() -> None:
     """
     # Summary
@@ -481,6 +489,7 @@ def test_base_path_onemanage_links_fabrics_00910() -> None:
 # onemanage_top_down() Method Tests (1000-1099)
 # ============================================================================
 
+
 def test_base_path_onemanage_top_down_01000() -> None:
     """
     # Summary
@@ -523,6 +532,7 @@ def test_base_path_onemanage_top_down_01010() -> None:
 # ============================================================================
 # onemanage_top_down_fabrics() Method Tests (1100-1199)
 # ============================================================================
+
 
 def test_base_path_onemanage_top_down_fabrics_01100() -> None:
     """

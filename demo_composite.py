@@ -21,10 +21,9 @@ This example shows how to build complex queries that combine:
 - Multiple parameter types in a single request
 """
 
-from urllib.parse import urlencode, quote
-
 from base_paths import BasePath
-from endpoints import BooleanStringEnum, EpOneManageFabricConfigDeploySwitch
+from enums import BooleanStringEnum
+from onemanage_fabric_endpoints import EpOneManageFabricConfigDeploySwitch
 from query_params import CompositeQueryParams, LuceneQueryParams
 
 
@@ -50,16 +49,12 @@ def example_1_basic_composite() -> None:
     ep.query_params.incl_all_msd_switches = BooleanStringEnum.FALSE
 
     # Create Lucene filtering parameters to find specific switches
-    lucene_params = LuceneQueryParams(
-        filter="name:Spine* AND role:spine",
-        max=50,
-        sort="name:asc"
-    )
+    lucene_params = LuceneQueryParams(filter="name:Spine* AND role:spine", max=50, sort="name:asc")
 
     # Compose them together
     composite = CompositeQueryParams()
     composite.add(ep.query_params)  # Add endpoint-specific params
-    composite.add(lucene_params)     # Add Lucene filtering
+    composite.add(lucene_params)  # Add Lucene filtering
 
     # Build the complete URL - use BasePath to get path without query params
     base_path = BasePath.onemanage_fabrics(ep.fabric_name, "config-deploy", ep.switch_sn)
@@ -68,18 +63,18 @@ def example_1_basic_composite() -> None:
 
     print(f"\nEndpoint: {ep.__class__.__name__}")
     print(f"Base Path: {base_path}")
-    print(f"\nEndpoint Parameters:")
+    print("\nEndpoint Parameters:")
     print(f"  - force_show_run: {ep.query_params.force_show_run}")
     print(f"  - incl_all_msd_switches: {ep.query_params.incl_all_msd_switches}")
-    print(f"\nLucene Filters:")
+    print("\nLucene Filters:")
     print(f"  - filter: {lucene_params.filter}")
     print(f"  - max: {lucene_params.max}")
     print(f"  - sort: {lucene_params.sort}")
-    print(f"\nComposite Query String (URL-encoded):")
+    print("\nComposite Query String (URL-encoded):")
     print(f"  {query_string}")
-    print(f"\nComposite Query String (not encoded):")
+    print("\nComposite Query String (not encoded):")
     print(f"  {composite.to_query_string(url_encode=False)}")
-    print(f"\nFull URL:")
+    print("\nFull URL:")
     print(f"  {full_url}")
     print()
 
@@ -100,11 +95,7 @@ def example_2_lucene_only() -> None:
 
     # Only use Lucene filtering - no endpoint-specific params
     lucene_params = LuceneQueryParams(
-        filter="ipAddress:10.1.* OR ipAddress:10.2.*",
-        max=100,
-        offset=0,
-        sort="ipAddress:asc",
-        fields="serialNumber,ipAddress,hostname,role"
+        filter="ipAddress:10.1.* OR ipAddress:10.2.*", max=100, offset=0, sort="ipAddress:asc", fields="serialNumber,ipAddress,hostname,role"
     )
 
     composite = CompositeQueryParams()
@@ -115,15 +106,15 @@ def example_2_lucene_only() -> None:
     full_url = f"{base_path}?{query_string}" if query_string else base_path
 
     print(f"\nBase Path: {base_path}")
-    print(f"\nLucene Filters:")
+    print("\nLucene Filters:")
     print(f"  - filter: {lucene_params.filter}")
     print(f"  - max: {lucene_params.max}")
     print(f"  - offset: {lucene_params.offset}")
     print(f"  - sort: {lucene_params.sort}")
     print(f"  - fields: {lucene_params.fields}")
-    print(f"\nComposite Query String (URL-encoded):")
+    print("\nComposite Query String (URL-encoded):")
     print(f"  {query_string}")
-    print(f"\nFull URL:")
+    print("\nFull URL:")
     print(f"  {full_url}")
     print()
 
@@ -148,41 +139,28 @@ def example_3_complex_lucene_filters() -> None:
 
     # Example 3a: AND with wildcards
     print("\n--- 3a: Find all spine switches in MyFabric ---")
-    lucene_3a = LuceneQueryParams(
-        filter="fabricName:MyFabric AND role:spine AND name:Spine-*",
-        max=20,
-        sort="name:asc"
-    )
+    lucene_3a = LuceneQueryParams(filter="fabricName:MyFabric AND role:spine AND name:Spine-*", max=20, sort="name:asc")
     composite_3a = CompositeQueryParams().add(ep.query_params).add(lucene_3a)
     print(f"Filter: {lucene_3a.filter}")
     print(f"Query: {composite_3a.to_query_string()}\n")
 
     # Example 3b: OR conditions
     print("--- 3b: Find switches that are either spine or leaf ---")
-    lucene_3b = LuceneQueryParams(
-        filter="role:spine OR role:leaf",
-        max=50
-    )
+    lucene_3b = LuceneQueryParams(filter="role:spine OR role:leaf", max=50)
     composite_3b = CompositeQueryParams().add(ep.query_params).add(lucene_3b)
     print(f"Filter: {lucene_3b.filter}")
     print(f"Query: {composite_3b.to_query_string()}\n")
 
     # Example 3c: NOT conditions
     print("--- 3c: Find all switches except those in maintenance mode ---")
-    lucene_3c = LuceneQueryParams(
-        filter="NOT mode:maintenance AND status:active",
-        max=100
-    )
+    lucene_3c = LuceneQueryParams(filter="NOT mode:maintenance AND status:active", max=100)
     composite_3c = CompositeQueryParams().add(ep.query_params).add(lucene_3c)
     print(f"Filter: {lucene_3c.filter}")
     print(f"Query: {composite_3c.to_query_string()}\n")
 
     # Example 3d: Range query (for date/time or numeric values)
     print("--- 3d: Find switches deployed in 2024 ---")
-    lucene_3d = LuceneQueryParams(
-        filter="deployedDate:[2024-01-01 TO 2024-12-31]",
-        sort="deployedDate:desc"
-    )
+    lucene_3d = LuceneQueryParams(filter="deployedDate:[2024-01-01 TO 2024-12-31]", sort="deployedDate:desc")
     composite_3d = CompositeQueryParams().add(ep.query_params).add(lucene_3d)
     print(f"Filter: {lucene_3d.filter}")
     print(f"Query: {composite_3d.to_query_string()}\n")
@@ -193,7 +171,7 @@ def example_3_complex_lucene_filters() -> None:
         filter="(role:spine OR role:leaf) AND status:active AND NOT ipAddress:192.168.*",
         max=75,
         sort="role:asc,name:asc",
-        fields="serialNumber,hostname,role,ipAddress,status"
+        fields="serialNumber,hostname,role,ipAddress,status",
     )
     composite_3e = CompositeQueryParams().add(ep.query_params).add(lucene_3e)
     print(f"Filter: {lucene_3e.filter}")
@@ -226,12 +204,7 @@ def example_4_pagination() -> None:
     for page in range(total_pages):
         offset = page * page_size
 
-        lucene_params = LuceneQueryParams(
-            filter="status:active",
-            max=page_size,
-            offset=offset,
-            sort="name:asc"
-        )
+        lucene_params = LuceneQueryParams(filter="status:active", max=page_size, offset=offset, sort="name:asc")
 
         composite = CompositeQueryParams()
         composite.add(ep.query_params)
@@ -285,22 +258,18 @@ def example_5_dynamic_composition() -> None:
 
         lucene_filter = " AND ".join(filter_parts) if filter_parts else None
 
-        lucene_params = LuceneQueryParams(
-            filter=lucene_filter,
-            max=50 if limit_results else None,
-            sort="name:asc"
-        )
+        lucene_params = LuceneQueryParams(filter=lucene_filter, max=50 if limit_results else None, sort="name:asc")
         composite.add(lucene_params)
 
     query_string = composite.to_query_string()
     full_url = f"{base_path}?{query_string}" if query_string else base_path
 
-    print(f"\nConfiguration:")
+    print("\nConfiguration:")
     print(f"  - Enable Filtering: {enable_filtering}")
     print(f"  - Filter by Role: {filter_by_role}")
     print(f"  - Show Only Active: {show_only_active}")
     print(f"  - Limit Results: {limit_results}")
-    print(f"\nGenerated URL:")
+    print("\nGenerated URL:")
     print(f"  {full_url}")
     print()
 
@@ -320,26 +289,17 @@ def example_6_method_chaining():
     ep.switch_sn = "FOC12345678"
     ep.query_params.force_show_run = BooleanStringEnum.TRUE
 
-    lucene_params = LuceneQueryParams(
-        filter="role:spine",
-        max=25,
-        sort="name:asc"
-    )
+    lucene_params = LuceneQueryParams(filter="role:spine", max=25, sort="name:asc")
 
     # Chain multiple add() calls
-    query_string = (
-        CompositeQueryParams()
-        .add(ep.query_params)
-        .add(lucene_params)
-        .to_query_string()
-    )
+    query_string = CompositeQueryParams().add(ep.query_params).add(lucene_params).to_query_string()
 
-    print(f"\nUsing method chaining:")
-    print(f"  query = CompositeQueryParams()")
-    print(f"          .add(endpoint_params)")
-    print(f"          .add(lucene_params)")
-    print(f"          .to_query_string()")
-    print(f"\nResult:")
+    print("\nUsing method chaining:")
+    print("  query = CompositeQueryParams()")
+    print("          .add(endpoint_params)")
+    print("          .add(lucene_params)")
+    print("          .to_query_string()")
+    print("\nResult:")
     print(f"  {query_string}")
     print()
 
