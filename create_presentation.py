@@ -333,7 +333,20 @@ def main():
         ]
     )
 
-    # Slide 13: Maintainability
+    # Slide 13: Team Scalability
+    add_content_slide(
+        prs,
+        "Team Scalability",
+        [
+            "Work can be parallelized across team members",
+            "Endpoint development decoupled from Ansible module work",
+            "Clear module boundaries reduce merge conflicts",
+            "New contributors can focus on one domain without full codebase knowledge",
+            "Enables efficient resource allocation across projects"
+        ]
+    )
+
+    # Slide 14: Maintainability
     add_content_slide(
         prs,
         "Maintainability at Scale",
@@ -346,7 +359,7 @@ def main():
         ]
     )
 
-    # Slide 14: Graceful Degradation
+    # Slide 15: Graceful Degradation
     add_content_slide(
         prs,
         "Graceful Degradation",
@@ -358,7 +371,7 @@ def main():
         ]
     )
 
-    # Slide 15: Summary
+    # Slide 16: Summary
     add_content_slide(
         prs,
         "Summary",
@@ -371,7 +384,7 @@ def main():
         ]
     )
 
-    # Slide 16: Closing
+    # Slide 17: Closing
     add_title_slide(
         prs,
         "Questions?",
