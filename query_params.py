@@ -25,6 +25,7 @@ __metaclass__ = type  # pylint: disable=invalid-name
 __author__ = "Allen Robel"
 
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import TYPE_CHECKING, Optional, Union
 from urllib.parse import quote
 
@@ -121,8 +122,6 @@ class EndpointQueryParams(BaseModel):
         - Default implementation: convert all fields to key=value pairs.
         - Override this method for custom formatting.
         """
-        from enum import Enum
-
         params = []
         for field_name, field_value in self.model_dump(exclude_none=True).items():
             # Convert snake_case to camelCase for API compatibility
