@@ -1,3 +1,6 @@
+"""
+Enums used in the demo_ep package.
+"""
 from enum import Enum
 
 
