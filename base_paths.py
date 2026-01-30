@@ -60,6 +60,7 @@ class BasePath:
 
     # Root API paths
     NDFC_API: Final = "/appcenter/cisco/ndfc/api"
+    ND_INFRA_API: Final = "/api/v1/infra"
     ONEMANAGE: Final = "/onemanage"
     LOGIN: Final = "/login"
 
@@ -394,3 +395,53 @@ class BasePath:
         ```
         """
         return cls.onemanage_top_down("fabrics", *segments)
+
+    @classmethod
+    def nd_infra(cls, *segments: str) -> str:
+        """
+        # Summary
+
+        Build ND infra API path.
+
+        ## Parameters
+
+        - segments: Path segments to append after /api/v1/infra
+
+        ## Returns
+
+        - Complete ND infra API path
+
+        ## Example
+
+        ```python
+        path = BasePath.nd_infra("aaa", "localUsers")
+        # Returns: /api/v1/infra/aaa/localUsers
+        ```
+        """
+        if not segments:
+            return cls.ND_INFRA_API
+        return f"{cls.ND_INFRA_API}/{'/'.join(segments)}"
+
+    @classmethod
+    def nd_infra_aaa(cls, *segments: str) -> str:
+        """
+        # Summary
+
+        Build ND infra AAA API path.
+
+        ## Parameters
+
+        - segments: Path segments to append after aaa (e.g., "localUsers")
+
+        ## Returns
+
+        - Complete ND infra AAA path
+
+        ## Example
+
+        ```python
+        path = BasePath.nd_infra_aaa("localUsers")
+        # Returns: /api/v1/infra/aaa/localUsers
+        ```
+        """
+        return cls.nd_infra("aaa", *segments)

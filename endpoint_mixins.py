@@ -72,3 +72,9 @@ class LinkUuidMixin(BaseModel):
     """Mixin for endpoints that require link_uuid parameter."""
 
     link_uuid: Optional[str] = Field(default=None, min_length=1, description="Link UUID")
+
+
+class LoginIdMixin(BaseModel):
+    """Mixin for endpoints that require login_id parameter."""
+
+    login_id: Optional[str] = Field(default=None, min_length=1, description="Login ID")
